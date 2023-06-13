@@ -1,0 +1,36 @@
+
+
+<h1 class="text-center ">Chat GPT</h1>
+<div class="navbar navbar-expand-sm bg-dark navbar-dark p-1 mt-3 fixed-bottom">
+    
+    <label for="exampleFormControlTextarea1" class="form-label">Ask Me...</label>
+    <textarea [(ngModel)]="inputText" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <p class="text-center mt-2">
+        <button class="btn btn-primary" type="button" disabled *ngIf="isLoading">
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+        <button type="submit" *ngIf="!isLoading" (click)="Submit()" class="btn btn-primary px-5">Ask</button>
+    </p>
+</div>
+
+
+<div class="card p-3 m-3 card-h" *ngIf="showOutput">
+    <div class="alert alert-primary alert-dismissible mt-2" role="alert" *ngIf="isMessageCopy">
+        <div>Answer Copied</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<code>
+    <pre>
+        <code [highlight]="output"></code>
+    </pre>
+</code>
+<div>
+    <button class="btn btn-success" (click)="copyMessage()"><i class="bi bi-clipboard"></i></button>
+
+
+</div>
+</div>
+
+
+
