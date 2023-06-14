@@ -1,36 +1,54 @@
+<!----chatgpt with angular-->
 
 
-<h1 class="text-center ">Chat GPT</h1>
-<div class="navbar navbar-expand-sm bg-dark navbar-dark p-1 mt-3 fixed-bottom">
-    
-    <label for="exampleFormControlTextarea1" class="form-label">Ask Me...</label>
-    <textarea [(ngModel)]="inputText" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    <p class="text-center mt-2">
-        <button class="btn btn-primary" type="button" disabled *ngIf="isLoading">
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-            Loading...
-          </button>
-        <button type="submit" *ngIf="!isLoading" (click)="Submit()" class="btn btn-primary px-5">Ask</button>
-    </p>
-</div>
-
-
-<div class="card p-3 m-3 card-h" *ngIf="showOutput">
-    <div class="alert alert-primary alert-dismissible mt-2" role="alert" *ngIf="isMessageCopy">
-        <div>Answer Copied</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="row g-0">
+    <div class="col-md-3 mt-1">
+        <div class="card p-3  mx-2 sideNav card-h">
+            <ol>
+                <li class="m-2" *ngFor="let item of Questions">
+                    <button class="btn btn-light" (click)="Submit(item.question)">Say {{item.question}}</button>
+                </li>
+            </ol>
+        </div>
     </div>
-<code>
-    <pre>
-        <code [highlight]="output"></code>
-    </pre>
-</code>
-<div>
-    <button class="btn btn-success" (click)="copyMessage()"><i class="bi bi-clipboard"></i></button>
+    <div class="col-md-9">
+        <div class="card p-3 mx-2 mt-1 card-h">
+            <div class="alert alert-primary alert-dismissible mt-2" role="alert" *ngIf="isMessageCopy">
+                <div>Answer Copied</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <ol>
+                <li *ngFor="let item of Chat | reverseList">
+                    <h4 class="alert alert-light txt-color">{{item.question}}</h4>
+                    <pre class="mb-1 pre-tag"><code [highlight]="item.answer"></code></pre>
+                    <div class="text-end">
+                        <button class="btn btn-danger me-2" (click)="DeleteMessage(item.id)"><i
+                                class="bi bi-trash-fill"></i></button>
+                        <button class="btn btn-success " (click)="copyMessage(item.answer)"><i
+                                class="bi bi-clipboard"></i></button>
+                        </div>
 
+                    <hr>
+                </li>
+            </ol>
 
+        </div>
+    </div>
 </div>
+
+<div class="navbar navbar-expand-sm bg-dark navbar-dark p-1 mt-3 fixed-bottom">
+    <!-----we are used bootstrap class for styling  -->
+
+    <div class="input-group mx-5">
+        <textarea [(ngModel)]="inputText" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <span class="input-group-text">
+            <button class="btn btn-primary" type="button" disabled *ngIf="isLoading">
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </button>
+            <button type="submit" *ngIf="!isLoading" (click)="Submit(inputText)"
+                class="btn btn-primary px-5">Ask</button>
+            <!------used two way binding to bind module------->
+        </span>
+    </div>
 </div>
-
-
-

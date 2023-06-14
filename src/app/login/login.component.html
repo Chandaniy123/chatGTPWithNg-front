@@ -1,0 +1,30 @@
+<div class="row mt-5 g-0">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center txt-color">Login</h3>
+            </div>
+            <div class="card-body px-5 mx-5">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label txt-color">Email address</label>
+                    <input type="email" [(ngModel)]="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label txt-color">Password</label>
+                    <input type="password" class="form-control" id="exampleFormControlInput1" [(ngModel)]="password" placeholder="********">
+                  </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-center">
+                    <button *ngIf="!isLoading" (click)="Submit()" class="btn btn-info text-white fw-bold">Login</button>
+                    <button *ngIf="isLoading"  class="btn btn-info text-white fw-bold" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                      </button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
