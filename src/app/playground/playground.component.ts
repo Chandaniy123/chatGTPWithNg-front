@@ -15,14 +15,15 @@ export class PlaygroundComponent implements OnInit  {
   isMessageCopy: boolean = false;
   Questions : any
   Chat : any
-  userId : number = 1
+  userId : number = 0
   ChatRow : Chats
   constructor(private openAi : OpenAiService){
     this.ChatRow = new Chats();
   }//constructor called service layer
   ngOnInit(): void {
     this.GetListOfQuestions()
-    this.GetChatByUserId(1)
+    this.userId = localStorage.getItem("userId") as unknown as number;
+    this.GetChatByUserId(this.userId)
   }
   Submit(input : any) {// calling submit function
    // console.log(input);
@@ -32,12 +33,12 @@ export class PlaygroundComponent implements OnInit  {
       this.output = res
       // console.log(res);
       this.ChatRow.id = 0;
-      this.ChatRow.UserId = 1;
+      this.ChatRow.UserId = this.userId;
       this.ChatRow.Question = input;
       this.ChatRow.Answer = res;
       this.openAi.AddChat(this.ChatRow).subscribe(res => {
         console.log(res);
-        this.GetChatByUserId(1)
+        this.GetChatByUserId(this.userId)
       })
       input = ''
       this.inputText = ''
@@ -48,7 +49,12 @@ export class PlaygroundComponent implements OnInit  {
 
   copyMessage(text:any) { // create copy message function for copy text and message 
     this.isMessageCopy=true
-    navigator.clipboard.writeText(text).then().catch(e => console.log(e));
+    navigator.clipboard.writeText(text).then(() => {
+      this.isMessageCopy=true
+      setTimeout(() => {
+        this.isMessageCopy=false
+      }, 2000)
+    }).catch(e => console.log(e));
   }
 
   DeleteMessage(id : any){
@@ -63,7 +69,8 @@ export class PlaygroundComponent implements OnInit  {
       // console.log(questionRes);
       
       this.Questions = questionRes
-      console.log(this.Questions);
+      // console.log(this.Questions);
+      
       
     })
   }

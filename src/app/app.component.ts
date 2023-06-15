@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  showSplashScreen : boolean = true
   title = 'ChatGPTAngular-front';
+  constructor(){
+    setTimeout(() => {
+      this.showSplashScreen = false
+    }, 3000);
+  }
 }

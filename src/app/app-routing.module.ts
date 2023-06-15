@@ -7,7 +7,7 @@ import { authGuard } from 'src/Shared/auth.guard';
 
 const routes: Routes = [
   {path:'',component:PlaygroundComponent, canActivate:[authGuard]},
-  {path:'login',component:LoginComponent},
+  {path:'login',component:LoginComponent,},
   {path:'signup',component:SignupComponent}
 ];
 

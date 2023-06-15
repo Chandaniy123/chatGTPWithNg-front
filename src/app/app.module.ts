@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,12 @@ import { ReverseListPipe } from 'src/Shared/reverse-list.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +24,8 @@ import { SignupComponent } from './signup/signup.component';
     ReverseListPipe,
     NavbarComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    SplashScreenComponent
   ],
   imports: [
     BrowserModule,

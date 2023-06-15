@@ -25,6 +25,7 @@ export class LoginComponent {
       // console.log(this.user.id);
       this.userId = this.user.id?.toString()
       localStorage.setItem('userId', this.userId)
+      this.auth.EmitEvent();
       this.router.navigate(['/'])
     })
     this.isLoading = false
